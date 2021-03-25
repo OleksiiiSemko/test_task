@@ -49,7 +49,6 @@ class Window {
     GLuint tex;
 
     int width, height;
-    static int img_width, img_height;
     static unsigned char* image;
     static std::string filename;
     static double x, y, z;
