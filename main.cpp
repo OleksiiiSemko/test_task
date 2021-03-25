@@ -22,7 +22,7 @@
     fprintf(stderr, "Error: %s\n", description);
 }*/
 
-int main(void)
+int main()
 {
     /*glfwSetErrorCallback(error_callback);*/
 

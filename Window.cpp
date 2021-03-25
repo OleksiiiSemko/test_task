@@ -118,40 +118,6 @@ void Window::create_ebo() {
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(elements), elements, GL_STATIC_DRAW);
 }
 
-void Window::compile_vertex_shaders(const GLchar* vertex_source) {
-    vertex_shader = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vertex_shader, 1, &vertex_source, NULL);
-    glCompileShader(vertex_shader);
-}
-
-void Window::compile_fragment_shader(const GLchar* fragment_source) {
-    fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fragment_shader, 1, &fragment_source, NULL);
-    glCompileShader(fragment_shader);
-}
-
-void Window::link_shaders() {
-    shader_program = glCreateProgram();
-    glAttachShader(shader_program, vertex_shader);
-    glAttachShader(shader_program, fragment_shader);
-    glBindFragDataLocation(shader_program, 0, "outColor");
-    glLinkProgram(shader_program);
-    glUseProgram(shader_program);
-}
-
-void Window::specify_layout() {
-    pos_attrib = glGetAttribLocation(shader_program, "position");
-    glEnableVertexAttribArray(pos_attrib);
-    glVertexAttribPointer(pos_attrib, 2, GL_FLOAT, GL_FALSE, 7 * sizeof(GLfloat), 0);
-
-    GLint colAttrib = glGetAttribLocation(shader_program, "color");
-    glEnableVertexAttribArray(colAttrib);
-    glVertexAttribPointer(colAttrib, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(GLfloat), (void*)(2 * sizeof(GLfloat)));
-
-    GLint texAttrib = glGetAttribLocation(shader_program, "texcoord");
-    glEnableVertexAttribArray(texAttrib);
-    glVertexAttribPointer(texAttrib, 2, GL_FLOAT, GL_FALSE, 7 * sizeof(GLfloat), (void*)(5 * sizeof(GLfloat)));
-}
 
 void Window::create_texture() {
     glGenTextures(1, &tex);
@@ -193,73 +159,6 @@ void Window::update_screen() {
 
     glfwSwapBuffers(window);
     glfwPollEvents();
-}
-
-void Window::zoom() {
-    if (z < 20) {
-        z += 1;
-
-        render();
-    }
-}
-
-void Window::unzoom() {
-    if (z > 0) {
-        z -= 1;
-        render();
-    }
-    if (z == 0) {
-        x = 0;
-        y = 0;
-    }
-}
-
-void Window::move_north() {
-    double temp = y + (170 / pow(2, z) / 2);
-    if (temp < 85) {
-        y = temp;
-        render();
-    }
-    else if (z !=0 && y < 85) {
-        y = 85;
-        render();
-    }
-}
-
-void Window::move_south() {
-    double temp = y - (170 / pow(2, z) / 2);
-    if (temp > -85) {
-        y = temp;
-        render();
-    }
-    else if (z !=0 && y > -85) {
-        y = -85;
-        render();
-    }
-}
-
-void Window::move_east() {
-    double temp = x + 360 / pow(2, z) / 2;
-    if (temp < 180) {
-        x = temp;
-        render();
-    }
-    else if (z != 0 && x < 180) {
-        x = 180;
-        render();
-    }
-}
-
-void Window::move_west() {
-    double temp = x - (360 / pow(2, z) / 2);
-    if (temp > -180) {
-        x = temp;
-        render();
-    }
-    else if (z != 0 && x > -180) {
-        x = -180;
-        render();
-    }
 }
 
 Window::~Window() {

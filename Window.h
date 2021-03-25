@@ -36,12 +36,6 @@ class Window {
     void create_vao(); // Create vertex array object
     void create_vbo(); // Create a vertex buffer object
     void create_ebo(); // Create an element array
-    static void zoom();
-    static void unzoom();
-    static void move_north();
-    static void move_south();
-    static void move_east();
-    static void move_west();
     static void render();
 
     GLFWwindow* window;
