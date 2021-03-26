@@ -1,18 +1,25 @@
 #ifndef PANGEA_TEXTURE_H
 #define PANGEA_TEXTURE_H
+#include <glad/glad.h>
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
-#include <glad/glad.h>
 #include <SOIL/SOIL.h>
+#include <string>
 
 
 class Texture {
 public:
-    void create_texture();
-    void load_texture(unsigned char*);
+    Texture();
+    ~Texture();
+
+    void bind(GLuint slot = 0) const noexcept;
+    void unbind() const noexcept;
+
+    void load_texture(unsigned int, unsigned int, unsigned int);
 private:
-    static int img_width, img_height;
-    GLuint tex;
+    /*void _download_image(const std::string&, unsigned int, unsigned int, unsigned int);*/
+
+    GLuint _id;
 };
 
 

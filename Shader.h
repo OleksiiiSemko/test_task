@@ -1,22 +1,26 @@
 #ifndef PANGEA_SHADER_H
 #define PANGEA_SHADER_H
+#include <glad/glad.h>
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
-#include <glad/glad.h>
+
 
 class Shader {
 public:
-    Shader() = default;
+    Shader(const GLchar* vertex_source, const GLchar* fragment_source);
     virtual ~Shader();
 
-    void compile_vertex_shader(const GLchar*) const noexcept;
-    void compile_fragment_shader(const GLchar*) const noexcept;
-    void link_shaders() const noexcept;
-    void specify_layout() const noexcept;
+    void bind() const noexcept;
+    void unbind() const noexcept;
+    void link_shaders() noexcept;
+
+    GLuint get_shader_program() const noexcept;
+
 private:
-    GLuint vertex_shader = glCreateShader(GL_VERTEX_SHADER);
-    GLuint fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
-    GLuint shader_program = glCreateProgram();
+    GLuint _vertex_shader;
+    GLuint _fragment_shader;
+    GLuint _id;
+    GLuint shader_program;
 };
 
 

@@ -1,19 +1,28 @@
-#define GLFW_INCLUDE_NONE
-#include <GLFW/glfw3.h>
-#include <glad/glad.h>
-#include <SOIL/SOIL.h>
-
-#include "3rdparty/glfw/deps/linmath.h"
-
 #include <stdlib.h>
-#include <stdio.h>
-#include <fstream>
 #include <string>
-#include <sstream>
 #include <memory>
 #include "Window.h"
+#include "Application.h"
 
-
+/*
+static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, GLFW_TRUE);
+    else if (key == GLFW_KEY_Z && action == GLFW_PRESS)
+        zoom();
+    else if (key == GLFW_KEY_W && action == GLFW_PRESS)
+        move_north();
+    else if (key == GLFW_KEY_X && action == GLFW_PRESS)
+        unzoom();
+    else if (key == GLFW_KEY_S && action == GLFW_PRESS)
+        move_south();
+    else if (key == GLFW_KEY_D && action == GLFW_PRESS)
+        move_east();
+    else if (key == GLFW_KEY_A && action == GLFW_PRESS)
+        move_west();
+}
+*/
+/*glfwSetKeyCallback(_window.get_window_ptr(), key_callback);*/
 
 // Shader sources
 
@@ -24,6 +33,30 @@
 
 int main()
 {
+    if (!glfwInit()) {
+        exit(EXIT_FAILURE);
+    }
+
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+
+    GLFWwindow* window = glfwCreateWindow(512, 512, "Pangea", NULL, NULL);
+
+    if (!window) {
+        glfwTerminate();
+        exit(EXIT_FAILURE);
+    }
+
+    glfwMakeContextCurrent(window);
+    glfwSwapInterval(1);
+
+    gladLoadGL();
+    glfwSwapInterval(1);
+
+    Application application{window};
+
+    application.run();
+
     /*glfwSetErrorCallback(error_callback);*/
 
     /*GLint status;
@@ -38,12 +71,6 @@ int main()
         fs.close();
     }*/
 
-    std::string title{"pangea"};
-    std::unique_ptr<Window> window{ new Window{ 1024, 512, title }};
-    while (!window->should_close())
-    {
-        window->update_screen();
-    }
 
     exit(EXIT_SUCCESS);
 

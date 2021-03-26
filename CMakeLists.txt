@@ -20,11 +20,11 @@ add_executable(${CMAKE_PROJECT_NAME}
         main.cpp
         Window.cpp
         Shader.cpp
-        Layout.cpp
         Texture.cpp
         VertexBuffer.cpp
         ElementBuffers.cpp
         VertexArray.cpp
+        Application.cpp
         )
 
 target_link_libraries(pangea curlpp)

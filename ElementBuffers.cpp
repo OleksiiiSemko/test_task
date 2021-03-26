@@ -1,4 +1,5 @@
 #include "ElementBuffers.h"
+#include <iostream>
 
 ElementBuffers::ElementBuffers(const GLuint* elements, GLuint size) {
     glGenBuffers(1, &_id);
@@ -8,6 +9,7 @@ ElementBuffers::ElementBuffers(const GLuint* elements, GLuint size) {
 
 ElementBuffers::~ElementBuffers() {
     glDeleteBuffers(1, &_id);
+    std::cout << "Deleted element buffer" << std::endl;
 }
 
 void ElementBuffers::bind() const noexcept {
