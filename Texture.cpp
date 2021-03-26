@@ -1,6 +1,5 @@
 #include "Texture.h"
 #include <iostream>
-#include <SOIL/SOIL.h>
 #include <fstream>
 #include <sstream>
 #include <curlpp/cURLpp.hpp>
@@ -36,13 +35,12 @@ void Texture::load_texture(unsigned int x, unsigned int y, unsigned int z) {
         image = SOIL_load_image(filename.str().c_str(), &width, &height, 0, SOIL_LOAD_RGB);
     }*/
 
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+    SOIL_free_image_data(image);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_LINEAR);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-
-    SOIL_free_image_data(image);
 }
 
 /*void Texture::_download_image(const std::string& filename, unsigned int x, unsigned int y, unsigned int z) {

@@ -33,27 +33,8 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 
 int main()
 {
-    if (!glfwInit()) {
-        exit(EXIT_FAILURE);
-    }
 
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
-
-    GLFWwindow* window = glfwCreateWindow(512, 512, "Pangea", NULL, NULL);
-
-    if (!window) {
-        glfwTerminate();
-        exit(EXIT_FAILURE);
-    }
-
-    glfwMakeContextCurrent(window);
-    glfwSwapInterval(1);
-
-    gladLoadGL();
-    glfwSwapInterval(1);
-
-    Application application{window};
+    Application application{};
 
     application.run();
 

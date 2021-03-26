@@ -1,11 +1,12 @@
 #ifndef PANGEA_TEXTURE_H
 #define PANGEA_TEXTURE_H
-#include <glad/glad.h>
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
+#include <glad/glad.h>
 #include <SOIL/SOIL.h>
 #include <string>
 
+#include "3rdparty/glfw/deps/linmath.h"
 
 class Texture {
 public:

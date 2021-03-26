@@ -11,6 +11,8 @@
 #include "Shader.h"
 #include "ElementBuffers.h"
 
+#include "3rdparty/glfw/deps/linmath.h"
+
  static const GLchar* vertex_source = R"glsl(
     #version 130
     layout (location = 0) in vec2 position;
@@ -38,9 +40,12 @@ static const GLchar* fragment_source = R"glsl(
     in float TexIndex;
 
     layout(location = 0) out vec4 outColor;
+
+    uniform sampler2D Textures[4];
     void main()
     {
-        outColor = vec4(0.0, 0.0, 0.0, 0.0)
+        int index = int(TexIndex);
+        outColor = texture(Textures[index], Texcoord);
     }
 )glsl";
 
@@ -79,7 +84,7 @@ static GLuint elements[] = {
 
 class Application {
 public:
-    explicit Application(GLFWwindow*);
+    explicit Application();
     ~Application();
 
     void run();
@@ -87,14 +92,12 @@ private:
     void _render();
     unsigned int _x{0}, _y{0}, _z{1};
     int _img_width, _img_height;
+    int height, width;
 
     std::vector<std::unique_ptr<VertexArray>> vaos;
     std::vector<std::unique_ptr<VertexBuffer>> vbos;
 
     std::vector<std::unique_ptr<Texture>> texs;
-
-    Shader shader;
-    ElementBuffers ebo;
 
     GLFWwindow* window;
 };
