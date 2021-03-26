@@ -101,38 +101,6 @@ void Window::key_callback(GLFWwindow* window, int key, int scancode, int action,
         move_west();
 }
 
-void Window::create_vao() {
-    glGenVertexArrays(1, &vao);
-    glBindVertexArray(vao);
-}
-
-void Window::create_vbo() {
-    glGenBuffers(1, &vbo);
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-}
-
-void Window::create_ebo() {
-    glGenBuffers(1, &ebo);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(elements), elements, GL_STATIC_DRAW);
-}
-
-
-void Window::create_texture() {
-    glGenTextures(1, &tex);
-    glBindTexture(GL_TEXTURE_2D, tex);
-}
-
-void Window::load_texture() {
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, img_width, img_height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-    SOIL_free_image_data(image);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-}
-
 void Window::get_image() {
     std::fstream fs;
     std::ostringstream url_stream;
@@ -167,11 +135,6 @@ Window::~Window() {
     glDeleteProgram(shader_program);
     glDeleteShader(fragment_shader);
     glDeleteShader(vertex_shader);
-
-    glDeleteBuffers(1, &ebo);
-    glDeleteBuffers(1, &vbo);
-
-    glDeleteVertexArrays(1, &vao);
 
     glfwDestroyWindow(window);
 

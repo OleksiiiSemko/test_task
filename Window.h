@@ -20,12 +20,7 @@
 class Window {
  public:
     Window(int, int, std::string&);
-    void compile_vertex_shaders(const GLchar*); // Create and compile the vertex shader
-    void compile_fragment_shader(const GLchar*); // Create and compile the fragment shader
-    void link_shaders(); // Link the vertex and fragment shader into a shader program
-    void specify_layout(); // Specify the layout of the vertex data
     void create_texture(); // Create a texture object
-    static void load_texture();
     bool should_close();
     void update_screen();
     ~Window();
@@ -42,14 +37,7 @@ class Window {
     GLuint vao;
     GLuint vbo;
     GLuint ebo;
-    GLuint vertex_shader;
-    GLuint fragment_shader;
-    GLuint shader_program;
-    GLint pos_attrib;
-    GLuint tex;
-
     int width, height;
-    static unsigned char* image;
     static std::string filename;
     static double x, y, z;
 };
