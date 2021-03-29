@@ -8,9 +8,8 @@ Shader::Shader(const GLchar* vertex_source, const GLchar* fragment_source) {
     glCompileShader(_vertex_shader);
 
     _fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(_fragment_shader, 1, &fragment_source, NULL);
+    glShaderSource(_fragment_shader, 1, &fragment_source, nullptr);
     glCompileShader(_fragment_shader);
-
 
     link_shaders();
 }
@@ -28,6 +27,7 @@ void Shader::link_shaders() noexcept {
     glAttachShader(shader_program, _fragment_shader);
     glBindFragDataLocation(shader_program, 0, "outColor");
     glLinkProgram(shader_program);
+    glUseProgram(shader_program);
 }
 
 void Shader::bind() const noexcept {

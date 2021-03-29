@@ -12,7 +12,7 @@ public:
     void bind() const noexcept;
     void unbind() const noexcept;
 
-    void specify_layout(GLuint, const GLuint) const noexcept;
+    void specify_layout() const noexcept;
     const GLuint get_id() const noexcept;
 private:
     GLuint _id;

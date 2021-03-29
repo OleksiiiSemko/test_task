@@ -16,10 +16,8 @@ public:
     void bind(GLuint slot = 0) const noexcept;
     void unbind() const noexcept;
 
-    void load_texture(unsigned int, unsigned int, unsigned int);
+    void load_texture(unsigned char*, int, int);
 private:
-    /*void _download_image(const std::string&, unsigned int, unsigned int, unsigned int);*/
-
     GLuint _id;
 };
 
