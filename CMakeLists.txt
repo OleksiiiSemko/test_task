@@ -18,7 +18,12 @@ set(CMAKE_CXX_STANDARD 11)
 
 add_executable(${CMAKE_PROJECT_NAME}
         main.cpp
-        Window.cpp
+        Shader.cpp
+        Texture.cpp
+        VertexBuffer.cpp
+        ElementBuffers.cpp
+        VertexArray.cpp
+        Application.cpp
         )
 
 target_link_libraries(pangea curlpp)
